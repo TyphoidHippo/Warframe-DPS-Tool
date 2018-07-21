@@ -1,0 +1,20 @@
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.exe.config
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.exe
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.pdb
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.Form1.resources
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.Properties.Resources.resources
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.csproj.GenerateResource.Cache
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.exe
+W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.pdb
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.exe.config
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.exe
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.pdb
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WFLib.dll
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WFLib.pdb
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.csprojResolveAssemblyReference.cache
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.Form1.resources
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.Properties.Resources.resources
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.csproj.GenerateResource.Cache
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.exe
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.pdb
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\Weapons.ini
