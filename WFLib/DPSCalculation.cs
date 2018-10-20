@@ -30,6 +30,8 @@ namespace WFLib
 
             public double EidolonLimbHealth;
 
+            public TimeSpan ReloadTime;
+
             public double WFBuilderSustainedRaw;
             public double WFBuilderSustainedDetails;
 
@@ -89,6 +91,7 @@ namespace WFLib
 
             result.WFBuilderSustainedRaw = dps.TotalDamage_5_WithMultishot * BulletsPerSecond;
             result.WFBuilderSustainedDetails = dps.TotalDamage_6_WithHealthTypeFactors * BulletsPerSecond;
+            result.ReloadTime = TimeSpan.FromSeconds(dps.Reload);
             return result;
         }
 
@@ -150,6 +153,18 @@ namespace WFLib
             //List<Mod> allMods = new List<Mod>(MainMods.TestMods);
             List<Mod> allMods = new List<Mod>(MainMods.AllMods(pAllowHeavyCaliber));
             allMods.Remove(MainMods.Riven);
+
+            for(int i=allMods.Count-1;i>=0;i--)
+            {
+                var mod = allMods[i];
+                if(mod.IsAugment)
+                {
+                    if(!pSniper.AugmentNames.Contains(mod.Name))
+                    {
+                        allMods.RemoveAt(i);
+                    }
+                }
+            }
 
             if (pRiven1 == null && pRiven2 == null)
             {

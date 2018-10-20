@@ -1,6 +1,5 @@
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WFLib\bin\Release\Weapons.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WFLib\bin\Release\WFLib.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WFLib\bin\Release\WFLib.pdb
-Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WFLib\obj\Release\WFLib.csprojResolveAssemblyReference.cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WFLib\obj\Release\WFLib.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WFLib\obj\Release\WFLib.pdb
-Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WFLib\bin\Release\Weapons.ini

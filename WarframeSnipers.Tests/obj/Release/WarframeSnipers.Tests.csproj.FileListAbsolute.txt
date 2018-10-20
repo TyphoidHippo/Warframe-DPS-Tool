@@ -1,3 +1,4 @@
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\Weapons.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\WarframeSnipers.Tests.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\WarframeSnipers.Tests.pdb
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
@@ -7,4 +8,3 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Re
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\obj\Release\WarframeSnipers.Tests.csprojResolveAssemblyReference.cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\obj\Release\WarframeSnipers.Tests.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\obj\Release\WarframeSnipers.Tests.pdb
-Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\Weapons.ini

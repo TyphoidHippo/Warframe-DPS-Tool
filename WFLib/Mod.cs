@@ -60,6 +60,8 @@ namespace WFLib
         public readonly Percent Electric;
         public readonly Percent Toxin;
         public readonly Percent AugmentBonus;
+
+        public bool IsAugment { get { return this.AugmentBonus.AsDecimal0to1 != 0; } }
     }
 
     public static class MainMods
@@ -86,7 +88,7 @@ namespace WFLib
         public static readonly Mod CrashCourse = new Mod("CrashCourse", 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         public static readonly Mod PiercingCaliber = new Mod("PiercingCaliber", 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0);
 
-        public static readonly Mod LastingPurity = new Mod("LastingPurity", 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0);
+        public static readonly Mod LastingPurity = new Mod("LastingPurity", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60);
 
         public static readonly Mod Riven = new Mod("Riven", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 

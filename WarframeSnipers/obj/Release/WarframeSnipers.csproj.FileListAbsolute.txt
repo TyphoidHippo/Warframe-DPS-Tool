@@ -6,6 +6,7 @@ W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.P
 W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.csproj.GenerateResource.Cache
 W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.exe
 W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.pdb
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\Weapons.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.exe.config
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\WarframeSnipers.pdb
@@ -17,4 +18,3 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.csproj.GenerateResource.Cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeSnipers.pdb
-Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Release\Weapons.ini

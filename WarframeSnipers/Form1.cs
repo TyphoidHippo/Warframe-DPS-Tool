@@ -134,6 +134,7 @@ namespace WarframeSnipers
 
             this.DynamicLabels.Add(this.wfBuilderSustainedDetailsValue);
             this.DynamicLabels.Add(this.wfBuilderSustainedRawValue);
+            this.DynamicLabels.Add(this.reloadTimeValue);
             this.DynamicLabels.Add(this.toLimbBreak_NumReloads);
             this.DynamicLabels.Add(this.toLimbBreak_NumShots);
             this.DynamicLabels.Add(this.toLimbBreak_Time);
@@ -304,10 +305,23 @@ namespace WarframeSnipers
         private void CheckPrimitivesForChanges()
         {
             this.State.Primitives.Clear();
-            if (!AllNullOrWhitespaceOrZero(this.modMainElectric, this.riven1Electric, this.riven2Electric)) { this.State.Primitives.Add(Elements.Electric); }
-            if (!AllNullOrWhitespaceOrZero(this.modMainHeat, this.riven1Heat, this.riven2Heat)) { this.State.Primitives.Add(Elements.Heat); }
-            if (!AllNullOrWhitespaceOrZero(this.modMainCold, this.riven1Cold, this.riven2Cold)) { this.State.Primitives.Add(Elements.Cold); }
-            if (!AllNullOrWhitespaceOrZero(this.modMainToxin, this.riven1Toxin, this.riven2Toxin)) { this.State.Primitives.Add(Elements.Toxin); }
+            var E = this.riven1Electric;
+            var H = this.riven1Heat;
+            var C = this.riven1Cold;
+            var T = this.riven1Toxin;
+
+            if(this.rivenChoice2.Checked)
+            {
+                E = this.riven2Electric;
+                H = this.riven2Heat;
+                C = this.riven2Cold;
+                T = this.riven2Toxin;
+            }
+
+            if (!AllNullOrWhitespaceOrZero(this.modMainElectric, E )) { this.State.Primitives.Add(Elements.Electric); }
+            if (!AllNullOrWhitespaceOrZero(this.modMainHeat, H )) { this.State.Primitives.Add(Elements.Heat); }
+            if (!AllNullOrWhitespaceOrZero(this.modMainCold, C )) { this.State.Primitives.Add(Elements.Cold); }
+            if (!AllNullOrWhitespaceOrZero(this.modMainToxin, T )) { this.State.Primitives.Add(Elements.Toxin); }
 
             if (PrimitivesChanged(this.State.Primitives, this.State.LastPrimitives))
             {
@@ -400,6 +414,7 @@ namespace WarframeSnipers
 
                 this.damageAfterNumberOfShotsOutput.Text = string.Format("{0:0.00}", dps.DamageAfterVariableNumberOfShots);
 
+                this.reloadTimeValue.Text = String.Format("{0:0.00}", dps.ReloadTime.TotalSeconds);
                 this.wfBuilderSustainedRawValue.Text = String.Format("{0:0.00}", dps.WFBuilderSustainedRaw);
                 this.wfBuilderSustainedDetailsValue.Text = String.Format("{0:0.00}", dps.WFBuilderSustainedDetails);
 

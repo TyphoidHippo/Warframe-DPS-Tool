@@ -197,6 +197,8 @@
             this.chkArcaneMomentum1 = new System.Windows.Forms.CheckBox();
             this.chkArcaneMomentum2 = new System.Windows.Forms.CheckBox();
             this.chkOptimizeIncludesHeavyCaliber = new System.Windows.Forms.CheckBox();
+            this.label71 = new System.Windows.Forms.Label();
+            this.reloadTimeValue = new System.Windows.Forms.Label();
             this.pnlElements.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1237,7 +1239,7 @@
             // 
             // toLimbBreak_Time
             // 
-            this.toLimbBreak_Time.Location = new System.Drawing.Point(1095, 275);
+            this.toLimbBreak_Time.Location = new System.Drawing.Point(1092, 345);
             this.toLimbBreak_Time.Name = "toLimbBreak_Time";
             this.toLimbBreak_Time.Size = new System.Drawing.Size(87, 13);
             this.toLimbBreak_Time.TabIndex = 135;
@@ -1247,7 +1249,7 @@
             // label64
             // 
             this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(951, 275);
+            this.label64.Location = new System.Drawing.Point(948, 345);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(30, 13);
             this.label64.TabIndex = 134;
@@ -1255,7 +1257,7 @@
             // 
             // toLimbBreak_NumShots
             // 
-            this.toLimbBreak_NumShots.Location = new System.Drawing.Point(1095, 211);
+            this.toLimbBreak_NumShots.Location = new System.Drawing.Point(1092, 281);
             this.toLimbBreak_NumShots.Name = "toLimbBreak_NumShots";
             this.toLimbBreak_NumShots.Size = new System.Drawing.Size(87, 13);
             this.toLimbBreak_NumShots.TabIndex = 139;
@@ -1265,7 +1267,7 @@
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(951, 211);
+            this.label56.Location = new System.Drawing.Point(948, 281);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(74, 13);
             this.label56.TabIndex = 138;
@@ -1273,7 +1275,7 @@
             // 
             // toLimbBreak_NumReloads
             // 
-            this.toLimbBreak_NumReloads.Location = new System.Drawing.Point(1095, 227);
+            this.toLimbBreak_NumReloads.Location = new System.Drawing.Point(1092, 297);
             this.toLimbBreak_NumReloads.Name = "toLimbBreak_NumReloads";
             this.toLimbBreak_NumReloads.Size = new System.Drawing.Size(87, 13);
             this.toLimbBreak_NumReloads.TabIndex = 141;
@@ -1283,7 +1285,7 @@
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(951, 227);
+            this.label66.Location = new System.Drawing.Point(948, 297);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(86, 13);
             this.label66.TabIndex = 140;
@@ -1291,7 +1293,7 @@
             // 
             // toLimbBreak_TotalDamage
             // 
-            this.toLimbBreak_TotalDamage.Location = new System.Drawing.Point(1095, 243);
+            this.toLimbBreak_TotalDamage.Location = new System.Drawing.Point(1092, 313);
             this.toLimbBreak_TotalDamage.Name = "toLimbBreak_TotalDamage";
             this.toLimbBreak_TotalDamage.Size = new System.Drawing.Size(87, 13);
             this.toLimbBreak_TotalDamage.TabIndex = 143;
@@ -1301,7 +1303,7 @@
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(951, 243);
+            this.label65.Location = new System.Drawing.Point(948, 313);
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(74, 13);
             this.label65.TabIndex = 142;
@@ -1309,7 +1311,7 @@
             // 
             // toLimbBreak_WastedDamage
             // 
-            this.toLimbBreak_WastedDamage.Location = new System.Drawing.Point(1095, 259);
+            this.toLimbBreak_WastedDamage.Location = new System.Drawing.Point(1092, 329);
             this.toLimbBreak_WastedDamage.Name = "toLimbBreak_WastedDamage";
             this.toLimbBreak_WastedDamage.Size = new System.Drawing.Size(87, 13);
             this.toLimbBreak_WastedDamage.TabIndex = 145;
@@ -1319,7 +1321,7 @@
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(951, 259);
+            this.label67.Location = new System.Drawing.Point(948, 329);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(87, 13);
             this.label67.TabIndex = 144;
@@ -1372,7 +1374,7 @@
             // 
             // damageAfterNumberOfShotsInput
             // 
-            this.damageAfterNumberOfShotsInput.Location = new System.Drawing.Point(1082, 314);
+            this.damageAfterNumberOfShotsInput.Location = new System.Drawing.Point(1079, 384);
             this.damageAfterNumberOfShotsInput.Name = "damageAfterNumberOfShotsInput";
             this.damageAfterNumberOfShotsInput.Size = new System.Drawing.Size(100, 20);
             this.damageAfterNumberOfShotsInput.TabIndex = 147;
@@ -1381,7 +1383,7 @@
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(972, 318);
+            this.label63.Location = new System.Drawing.Point(969, 388);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(102, 13);
             this.label63.TabIndex = 148;
@@ -1389,7 +1391,7 @@
             // 
             // damageAfterNumberOfShotsOutput
             // 
-            this.damageAfterNumberOfShotsOutput.Location = new System.Drawing.Point(1079, 344);
+            this.damageAfterNumberOfShotsOutput.Location = new System.Drawing.Point(1076, 414);
             this.damageAfterNumberOfShotsOutput.Name = "damageAfterNumberOfShotsOutput";
             this.damageAfterNumberOfShotsOutput.Size = new System.Drawing.Size(100, 23);
             this.damageAfterNumberOfShotsOutput.TabIndex = 149;
@@ -1399,7 +1401,7 @@
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(1011, 96);
+            this.label68.Location = new System.Drawing.Point(1008, 166);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(98, 13);
             this.label68.TabIndex = 150;
@@ -1410,7 +1412,7 @@
             this.panel1.Controls.Add(this.eidoChoiceHarry);
             this.panel1.Controls.Add(this.eidoChoiceGary);
             this.panel1.Controls.Add(this.eidoChoiceTerry);
-            this.panel1.Location = new System.Drawing.Point(959, 112);
+            this.panel1.Location = new System.Drawing.Point(956, 182);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(79, 72);
             this.panel1.TabIndex = 151;
@@ -1452,7 +1454,7 @@
             // 
             // eidolonLimbHealth
             // 
-            this.eidolonLimbHealth.Location = new System.Drawing.Point(1095, 195);
+            this.eidolonLimbHealth.Location = new System.Drawing.Point(1092, 265);
             this.eidolonLimbHealth.Name = "eidolonLimbHealth";
             this.eidolonLimbHealth.Size = new System.Drawing.Size(87, 13);
             this.eidolonLimbHealth.TabIndex = 153;
@@ -1462,7 +1464,7 @@
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(951, 195);
+            this.label70.Location = new System.Drawing.Point(948, 265);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(63, 13);
             this.label70.TabIndex = 152;
@@ -1473,7 +1475,7 @@
             this.panel2.Controls.Add(this.outputCaseWorst);
             this.panel2.Controls.Add(this.outputCaseBest);
             this.panel2.Controls.Add(this.outputCaseAverage);
-            this.panel2.Location = new System.Drawing.Point(1098, 112);
+            this.panel2.Location = new System.Drawing.Point(1095, 182);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(79, 72);
             this.panel2.TabIndex = 152;
@@ -1663,11 +1665,33 @@
             this.chkOptimizeIncludesHeavyCaliber.Text = "Heavy Cal";
             this.chkOptimizeIncludesHeavyCaliber.UseVisualStyleBackColor = true;
             // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(938, 72);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(67, 13);
+            this.label71.TabIndex = 169;
+            this.label71.Text = "Reload Time";
+            // 
+            // reloadTimeValue
+            // 
+            this.reloadTimeValue.Location = new System.Drawing.Point(1095, 74);
+            this.reloadTimeValue.Name = "reloadTimeValue";
+            this.reloadTimeValue.Size = new System.Drawing.Size(92, 16);
+            this.reloadTimeValue.TabIndex = 170;
+            this.reloadTimeValue.Text = "Choose Weapon";
+            this.reloadTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1198, 520);
+            this.Controls.Add(this.wfBuilderSustainedRawValue);
+            this.Controls.Add(this.wfBuilderSustainedDetailsValue);
+            this.Controls.Add(this.reloadTimeValue);
+            this.Controls.Add(this.label71);
             this.Controls.Add(this.chkOptimizeIncludesHeavyCaliber);
             this.Controls.Add(this.chkArcaneMomentum2);
             this.Controls.Add(this.chkArcaneMomentum1);
@@ -1702,9 +1726,7 @@
             this.Controls.Add(this.label56);
             this.Controls.Add(this.toLimbBreak_Time);
             this.Controls.Add(this.label64);
-            this.Controls.Add(this.wfBuilderSustainedDetailsValue);
             this.Controls.Add(this.label62);
-            this.Controls.Add(this.wfBuilderSustainedRawValue);
             this.Controls.Add(this.label61);
             this.Controls.Add(this.modMainAugmentBonusDamage);
             this.Controls.Add(this.label60);
@@ -2013,6 +2035,8 @@
         private System.Windows.Forms.CheckBox chkArcaneMomentum1;
         private System.Windows.Forms.CheckBox chkArcaneMomentum2;
         private System.Windows.Forms.CheckBox chkOptimizeIncludesHeavyCaliber;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label reloadTimeValue;
     }
 }
 

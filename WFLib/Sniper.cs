@@ -32,7 +32,8 @@ namespace WFLib
             double pCritMultiplier,
             Percent pZoomBonusCC,
             Percent pZoomBonusCD,
-            bool pFireRateCappedAt10)
+            bool pFireRateCappedAt10,
+            IReadOnlyCollection<string> pAugmentNames)
         {
             this.Name = pName;
             this.Impact = pImpact;
@@ -60,6 +61,7 @@ namespace WFLib
             this.ZoomBonusCC = pZoomBonusCC;
             this.ZoomBonusCD = pZoomBonusCD;
             this.FireRateCappedAt10 = pFireRateCappedAt10;
+            this.AugmentNames = new List<string>(pAugmentNames);
 
             if(this.PelletsTillx15 == 0) { this.PelletsTillx15 = int.MaxValue; }
         }
@@ -91,6 +93,8 @@ namespace WFLib
         public readonly Percent ZoomBonusCC;
         public readonly Percent ZoomBonusCD;
         public readonly bool FireRateCappedAt10;
+        public readonly IReadOnlyCollection<string> AugmentNames;
+
         public double TotalBaseDamage
         {
             get
@@ -128,10 +132,13 @@ namespace WFLib
                 if (string.IsNullOrWhiteSpace(line)) { continue; }
                 if (line.StartsWith("#")) { continue; }
 
-                var parts = line.Split(',');
+                var parts = line.Split(',').ToList();
                 string name = parts[0].Trim();
-
-                if (parts.Length != 23) { continue; }
+                if(parts.Count == 23)
+                {
+                    parts.Add("");
+                }
+                if (parts.Count != 24) { continue; }
 
                 try
                 {
@@ -159,7 +166,8 @@ namespace WFLib
                         double.Parse(parts[ii++]),
                         int.Parse(parts[ii++]),
                         int.Parse(parts[ii++]),
-                        bool.Parse(parts[ii++])
+                        bool.Parse(parts[ii++]),
+                        parts[ii++].Split(';').Where((x)=>!string.IsNullOrWhiteSpace(x)).Select((x)=>x.Trim()).ToList()
                         ));
                 }
                 catch(Exception ex)
