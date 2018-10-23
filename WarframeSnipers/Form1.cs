@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WFLib;
 
-namespace WarframeSnipers
+namespace WarframeDPSTool
 {
     public partial class Form1 : Form
     {

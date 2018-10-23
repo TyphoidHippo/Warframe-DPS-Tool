@@ -1,4 +1,6 @@
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\HealthTypes.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\Weapons.ini
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\Mods.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\WarframeSnipers.Tests.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\WarframeSnipers.Tests.pdb
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers.Tests\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll

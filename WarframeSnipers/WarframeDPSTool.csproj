@@ -7,8 +7,8 @@
     <ProjectGuid>{6F507416-9825-45F1-B2D2-970806942981}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WarframeSnipers</RootNamespace>
-    <AssemblyName>WarframeSnipers</AssemblyName>
+    <RootNamespace>WarframeDPSTool</RootNamespace>
+    <AssemblyName>WarframeDPSTool</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -85,6 +85,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

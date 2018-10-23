@@ -1,4 +1,4 @@
-﻿namespace WarframeSnipers
+﻿namespace WarframeDPSTool
 {
     partial class Form1
     {

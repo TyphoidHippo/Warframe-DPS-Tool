@@ -1,0 +1,7 @@
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\ReleaseTool\bin\Debug\ReleaseTool.exe.config
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\ReleaseTool\bin\Debug\ReleaseTool.exe
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\ReleaseTool\bin\Debug\ReleaseTool.pdb
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\ReleaseTool\bin\Debug\ICSharpCode.SharpZipLib.dll
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\ReleaseTool\bin\Debug\ICSharpCode.SharpZipLib.xml
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\ReleaseTool\obj\Debug\ReleaseTool.exe
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\ReleaseTool\obj\Debug\ReleaseTool.pdb
