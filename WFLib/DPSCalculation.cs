@@ -152,7 +152,7 @@ namespace WFLib
         {
             //List<Mod> allMods = new List<Mod>(MainMods.TestMods);
             List<Mod> allMods = new List<Mod>(MainMods.AllMods(pAllowHeavyCaliber));
-            allMods.Remove(MainMods.Riven);
+            allMods.Remove(allMods.Where((x)=>x.Name == "Riven").Single());
 
             for(int i=allMods.Count-1;i>=0;i--)
             {

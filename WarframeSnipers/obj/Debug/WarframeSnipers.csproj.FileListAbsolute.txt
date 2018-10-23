@@ -8,6 +8,7 @@ W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Debug\WarframeSnipers.exe
 W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Debug\WarframeSnipers.pdb
 W:\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Debug\WarframeSnipers.csprojResolveAssemblyReference.cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Debug\Weapons.ini
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Debug\Mods.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Debug\WarframeSnipers.exe.config
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Debug\WarframeSnipers.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Debug\WarframeSnipers.pdb
@@ -19,3 +20,4 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Debug\Wa
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Debug\WarframeSnipers.csproj.GenerateResource.Cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Debug\WarframeSnipers.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Debug\WarframeSnipers.pdb
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\bin\Debug\HealthTypes.ini

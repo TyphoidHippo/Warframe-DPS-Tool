@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,30 +67,7 @@ namespace WFLib
 
     public static class MainMods
     {
-        public static readonly Mod Serration = new Mod("Serration", 0, 0, 0, 0, 165, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod HeavyCaliber = new Mod("HeavyCaliber", 0, 0, 0, 0, 165, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-
-        public static readonly Mod SplitChamber = new Mod("SplitChamber", 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod VigilanteArmaments = new Mod("VigilanteArmaments", 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-
-        public static readonly Mod PointStrike = new Mod("PointStrike", 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod VitalSense = new Mod("VitalSense", 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-
-        public static readonly Mod PrimedCryoRounds = new Mod("PrimedCryoRounds", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 165, 0, 0, 0, 0);
-        public static readonly Mod Hellfire = new Mod("Hellfire", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 0, 0);
-        public static readonly Mod Stormbringer = new Mod("Stormbringer", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 0);
-        public static readonly Mod InfectedClip = new Mod("InfectedClip", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0);
-
-        public static readonly Mod VileAcceleration = new Mod("VileAcceleration", 0, 0, 0, 0, -15, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod SpeedTrigger = new Mod("SpeedTrigger", 0, 0, 0, 0, 0, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod PrimedFastHands = new Mod("PrimedFastHands", 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 0, 0, 0);
-
-        public static readonly Mod FangedFusillade = new Mod("FangedFusillade", 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod CrashCourse = new Mod("CrashCourse", 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod PiercingCaliber = new Mod("PiercingCaliber", 0, 0, 0, 0, 0, 0, 120, 0, 0, 0, 0, 0, 0, 0, 0);
-
-        public static readonly Mod LastingPurity = new Mod("LastingPurity", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60);
-
+        private static readonly Mod HeavyCaliber = new Mod("HeavyCaliber", 0, 0, 0, 0, 165, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         public static readonly Mod Riven = new Mod("Riven", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         private static readonly IReadOnlyCollection<Mod> _AllMods = null;
@@ -98,30 +76,63 @@ namespace WFLib
         {
             return pIncludeHeavyCaliber ? _AllMods : _AllModsNoHeavyCaliber;
         }
-        //public static readonly IReadOnlyCollection<Mod> TestMods = new Mod[]
-        //{
-        //    Serration, HeavyCaliber, SplitChamber,
-        //    VigilanteArmaments, PointStrike, VitalSense,
-        //    VileAcceleration,
-        //    PrimedFastHands,
-        //    PrimedCryoRounds
-        //};
 
         static MainMods()
         {
-            var allMods = new List<Mod>();
-            var allFields = typeof(MainMods).GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
-            foreach (var fi in allFields)
+            var allMods = new Dictionary<string, Mod>();
+            allMods.Add(Riven.Name, Riven);
+            allMods.Add(HeavyCaliber.Name, HeavyCaliber);
+
+            var ass = System.Reflection.Assembly.GetEntryAssembly();
+            var path = System.IO.Path.GetDirectoryName(ass.Location);
+
+            foreach (var v in System.IO.File.ReadAllLines(path + "\\Mods.ini"))
             {
-                if (fi.FieldType == typeof(Mod))
+                string line = v;
+                if (line == null) { continue; }
+                line = line.Trim();
+                if (string.IsNullOrWhiteSpace(line)) { continue; }
+                if (line.StartsWith("#")) { continue; }
+
+                var parts = line.Split(',').ToList();
+                string name = parts[0].Trim();
+
+                if (string.IsNullOrWhiteSpace(name)) { continue; }
+                if (allMods.ContainsKey(name)) { continue; }
+
+                if (parts.Count != 16) { continue; }
+
+                try
                 {
-                    var instance = fi.GetValue(null);
-                    allMods.Add((Mod)instance);
+                    int ii = 0;
+                    allMods.Add(name, new Mod(parts[ii++],
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                        Percent.FromPercent0to100(double.Parse(parts[ii++]))
+                        ));
+                }
+                catch (Exception ex)
+                {
+                    var vv = ex;
+                    if (Debugger.IsAttached) { Debugger.Break(); }
                 }
             }
 
-            _AllMods = allMods;
-            var noHC = new List<Mod>(allMods);
+
+            _AllMods = allMods.Values;
+            var noHC = new List<Mod>(_AllMods);
             noHC.Remove(HeavyCaliber);
             _AllModsNoHeavyCaliber = noHC;
         }

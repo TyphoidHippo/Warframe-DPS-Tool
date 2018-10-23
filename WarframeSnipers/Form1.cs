@@ -331,9 +331,9 @@ namespace WarframeSnipers
             }
         }
 
-        private static void SetModSlot(ComboBox pModSlot, Mod pMod)
+        private static void SetModSlot(ComboBox pModSlot, string pMod)
         {
-            pModSlot.SelectedIndex = pModSlot.Items.IndexOf(pMod.Name);
+            pModSlot.SelectedIndex = pModSlot.Items.IndexOf(pMod);
         }
 
         private void SlottedModsChanged(object sender, EventArgs e)
@@ -534,14 +534,14 @@ namespace WarframeSnipers
         private void btnMainModsDefault_Click(object sender, EventArgs e)
         {
             this.State.MainMods.Clear();
-            SetModSlot(this.modSlot1, MainMods.Serration);
-            SetModSlot(this.modSlot2, MainMods.SplitChamber);
-            SetModSlot(this.modSlot3, MainMods.HeavyCaliber);
-            SetModSlot(this.modSlot4, MainMods.PointStrike);
-            SetModSlot(this.modSlot5, MainMods.VitalSense);
-            SetModSlot(this.modSlot6, MainMods.PrimedCryoRounds);
-            SetModSlot(this.modSlot7, MainMods.Hellfire);
-            SetModSlot(this.modSlot8, MainMods.Stormbringer);
+            SetModSlot(this.modSlot1, "Serration");
+            SetModSlot(this.modSlot2, "SplitChamber");
+            SetModSlot(this.modSlot3, "HeavyCaliber");
+            SetModSlot(this.modSlot4, "PointStrike");
+            SetModSlot(this.modSlot5, "VitalSense");
+            SetModSlot(this.modSlot6, "PrimedCryoRounds");
+            SetModSlot(this.modSlot7, "Hellfire");
+            SetModSlot(this.modSlot8, "Stormbringer");
 
             this.SlottedModsChanged();
         }
@@ -584,12 +584,12 @@ namespace WarframeSnipers
             this.State.MainMods.Clear();
             for(int i=0;i<bestMods.Mods.Count;i++)
             {
-                SetModSlot(this.ModSlots[i], bestMods.Mods[i]);
+                SetModSlot(this.ModSlots[i], bestMods.Mods[i].Name);
             }
 
             if(riven!=null)
             {
-                SetModSlot(this.modSlot8, MainMods.Riven);
+                SetModSlot(this.modSlot8, MainMods.Riven.Name);
                 if(riven.Name.EndsWith("1"))
                 {
                     this.rivenChoice1.PerformClick();

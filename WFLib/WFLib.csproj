@@ -49,12 +49,17 @@
     <Compile Include="Sniper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HealthTypes.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Weapons.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mods.ini" />
+    <Content Include="Mods.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
