@@ -18,6 +18,7 @@ namespace WarframeDPSTool
         {
             public FormState(Form1 pParent)
             {
+                Action onChange = () => { using (pParent.MassStateChange) { } };
                 this.MainMods = new ModBinding(
                     pParent.modMainCritChance,
                     pParent.modMainCritDamage,
@@ -33,7 +34,8 @@ namespace WarframeDPSTool
                     pParent.modMainHeat,
                     pParent.modMainElectric,
                     pParent.modMainToxin,
-                    pParent.modMainAugmentBonusDamage);
+                    pParent.modMainAugmentBonusDamage,
+                    onChange);
 
                 this.Riven1 = new ModBinding(
                     pParent.riven1CritChance,
@@ -50,7 +52,8 @@ namespace WarframeDPSTool
                     pParent.riven1Heat,
                     pParent.riven1Electric,
                     pParent.riven1Toxin,
-                    null);
+                    null,
+                    onChange);
 
                 this.Riven2 = new ModBinding(
                     pParent.riven2CritChance,
@@ -67,7 +70,8 @@ namespace WarframeDPSTool
                     pParent.riven2Heat,
                     pParent.riven2Electric,
                     pParent.riven2Toxin,
-                    null);
+                    null,
+                    onChange);
 
                 this.Health = new HealthBinding(
                     pParent.healthVsImpact,
@@ -82,14 +86,15 @@ namespace WarframeDPSTool
                     pParent.healthVsGas,
                     pParent.healthVsMagnetic,
                     pParent.healthVsCorrosive,
-                    pParent.healthVsBlast);
+                    pParent.healthVsBlast,
+                    onChange);
             }
 
             public readonly ModBinding MainMods;
             public readonly ModBinding Riven1;
             public readonly ModBinding Riven2;
             public readonly HealthBinding Health;
-            public Sniper Sniper;
+            public Weapon Weapon;
             public readonly List<Elements> Elements = new List<Elements>();
             public readonly List<Elements[]> ElementChoices = new List<Elements[]>();
 
@@ -102,15 +107,83 @@ namespace WarframeDPSTool
 
 
         private readonly FormState State;
-        private bool doingMassStateChange = false;
         private readonly List<Label> DynamicLabels = new List<Label>();
-        private readonly List<ComboBox> ModSlots = new List<ComboBox>();
+        private readonly List<ModSlot> ModSlots = new List<ModSlot>();
         private readonly List<TextBox> Riven1Inputs = new List<TextBox>();
         private readonly List<TextBox> Riven2Inputs = new List<TextBox>();
+
+        private int _MassStateChange = 0;
+        private ActionLock MassStateChange
+        {
+            get
+            {
+                this._MassStateChange++;
+                if (this._MassStateChange == 1)
+                {
+                    this.SetDynamicLabels("Calculating...");
+                    this.SetAutoModButtonsEnabled(false);
+                }
+
+                return new ActionLock(() =>
+                {
+                    this._MassStateChange--;
+
+                    if (this._MassStateChange == 0)
+                    {
+                        if (this.State.Weapon == null)
+                        {
+                            this.SetDynamicLabels("Choose Weapon");
+                            this.SetAutoModButtonsEnabled(false);
+                        }
+                        else
+                        {
+                            this.CheckPrimitivesForChanges();
+                            int damageAfterNumberOfShots = 0;
+                            int.TryParse(this.damageAfterNumberOfShotsInput.Text, out damageAfterNumberOfShots);
+
+                            var dps = DPSCalculation.MainCalculation(this.State.Eidolon, this.State.DPSCase, this.State.Weapon, this.State.Elements.ToArray(), this.State.Health.ToHealth(), damageAfterNumberOfShots, this.State.MainMods.ToMod("MainMods"), this.rivenChoice1.Checked ? this.State.Riven1.ToMod("Riven1") : this.State.Riven2.ToMod("Riven2"));
+
+                            this.toLimbBreak_NumReloads.Text = dps.ToLimbBreak_NumReloads.ToString();
+                            this.toLimbBreak_NumShots.Text = dps.ToLimbBreak_NumShots.ToString();
+                            this.toLimbBreak_Time.Text = String.Format("{0:0.00}", dps.ToLimbBreak_TimeSeconds);
+                            this.toLimbBreak_TotalDamage.Text = String.Format("{0:0.00}", dps.ToLimbBreak_TotalDamage);
+                            this.toLimbBreak_WastedDamage.Text = String.Format("{0:0.00}", (dps.ToLimbBreak_TotalDamage - dps.EidolonLimbHealth));
+
+                            this.damageAfterNumberOfShotsOutput.Text = string.Format("{0:0.00}", dps.DamageAfterVariableNumberOfShots);
+
+                            this.reloadTimeValue.Text = String.Format("{0:0.00}", dps.ReloadTime.TotalSeconds);
+                            this.wfBuilderSustainedRawValue.Text = String.Format("{0:0.00}", dps.WFBuilderSustainedRaw);
+                            this.wfBuilderSustainedDetailsValue.Text = String.Format("{0:0.00}", dps.WFBuilderSustainedDetails);
+
+                            this.eidolonLimbHealth.Text = String.Format("{0:0.00}", dps.EidolonLimbHealth);
+                            this.SetAutoModButtonsEnabled(true);
+
+                            bool isRifle = this.State.Weapon.WeaponClass.HasFlag(WeaponClass.Rifle);
+                            bool isSniper = this.State.Weapon.WeaponClass.HasFlag(WeaponClass.Sniper);
+                            this.chkOptimizeIncludesHeavyCaliber.Enabled = isRifle;
+                            this.chkArcaneMomentum1.Enabled = isSniper;
+                            this.chkArcaneMomentum2.Enabled = isSniper;
+                            if (!isRifle)
+                            {
+                                this.chkOptimizeIncludesHeavyCaliber.Checked = false;
+                            }
+                            if (!isSniper)
+                            {
+                                this.chkArcaneMomentum1.Checked = false;
+                                this.chkArcaneMomentum2.Checked = false;
+                            }
+                        }
+                    }
+                });
+            }
+        }
 
         public Form1()
         {
             InitializeComponent();
+
+            this.chkArcaneMomentum1.CheckedChanged += (s, e) => this.SlottedModsChanged();
+            this.chkArcaneMomentum2.CheckedChanged += (s, e) => this.SlottedModsChanged();
 
             this.Text += string.Format(" - v:{0}", Application.ProductVersion);
 
@@ -141,30 +214,22 @@ namespace WarframeDPSTool
             this.DynamicLabels.Add(this.toLimbBreak_TotalDamage);
             this.DynamicLabels.Add(this.toLimbBreak_WastedDamage);
 
-            this.ModSlots.Add(this.modSlot1);
-            this.ModSlots.Add(this.modSlot2);
-            this.ModSlots.Add(this.modSlot3);
-            this.ModSlots.Add(this.modSlot4);
-            this.ModSlots.Add(this.modSlot5);
-            this.ModSlots.Add(this.modSlot6);
-            this.ModSlots.Add(this.modSlot7);
-            this.ModSlots.Add(this.modSlot8);
+            this.ModSlots.Add(new ModSlot(this.modSlot1, this.SlottedModsChanged));
+            this.ModSlots.Add(new ModSlot(this.modSlot2, this.SlottedModsChanged));
+            this.ModSlots.Add(new ModSlot(this.modSlot3, this.SlottedModsChanged));
+            this.ModSlots.Add(new ModSlot(this.modSlot4, this.SlottedModsChanged));
+            this.ModSlots.Add(new ModSlot(this.modSlot5, this.SlottedModsChanged));
+            this.ModSlots.Add(new ModSlot(this.modSlot6, this.SlottedModsChanged));
+            this.ModSlots.Add(new ModSlot(this.modSlot7, this.SlottedModsChanged));
+            this.ModSlots.Add(new ModSlot(this.modSlot8, this.SlottedModsChanged));
+
 
             this.SetDynamicLabels("Choose Weapon");
 
-            this.sniperSelectionBox.Items.AddRange(Sniper.AllSnipers.Select((x) => x.Name).ToArray());
-
-            var allModNames = MainMods.AllMods(true).Select((x) => x.Name).ToArray();
-            foreach(var modSlot in this.ModSlots)
-            {
-                modSlot.Items.AddRange(allModNames);
-                modSlot.SelectedValueChanged += this.SlottedModsChanged;
-            }
-            this.chkArcaneMomentum1.CheckedChanged += this.SlottedModsChanged;
-            this.chkArcaneMomentum2.CheckedChanged += this.SlottedModsChanged;
+            this.sniperSelectionBox.Items.AddRange(Weapon.All.ToArray());
 
             this.btnHealthRobotic_Click(null, null);
-            this.btnMainModsDefault_Click(null, null);
+            //this.btnMainModsDefault_Click(null, null);
 
             this.Riven1Inputs.Add(this.riven1Cold);
             this.Riven1Inputs.Add(this.riven1CritChance);
@@ -221,6 +286,13 @@ namespace WarframeDPSTool
             {
                 v.Text = p;
             }
+        }
+
+        private void SetAutoModButtonsEnabled(bool p)
+        {
+            this.btnMainModsDefault.Enabled = p;
+            this.btnMainModsOptimize.Enabled = p;
+            this.btnMainModsClear.Enabled = p;
         }
 
         private static bool PrimitivesChanged(List<Elements> a, List<Elements> b)
@@ -331,35 +403,24 @@ namespace WarframeDPSTool
             }
         }
 
-        private static void SetModSlot(ComboBox pModSlot, string pMod)
-        {
-            pModSlot.SelectedIndex = pModSlot.Items.IndexOf(pMod);
-        }
-
-        private void SlottedModsChanged(object sender, EventArgs e)
-        {
-            this.SlottedModsChanged();
-        }
         private void SlottedModsChanged()
         {
-            this.doingMassStateChange = true;
-            this.State.MainMods.Clear();
-            bool enableRivens = false;
-            foreach(var slot in this.ModSlots)
+            using (this.MassStateChange)
             {
-                if (slot.SelectedItem != null)
+                this.State.MainMods.Clear();
+                bool enableRivens = false;
+                foreach (var slot in this.ModSlots)
                 {
-                    var modName = slot.SelectedItem.ToString();
-                    var mod = MainMods.AllMods(true).Where((x) => x.Name == modName).First();
-                    this.State.MainMods.AddValues(mod);
-                    if(mod == MainMods.Riven) { enableRivens = true; }
+                    if (slot.Value != null)
+                    {
+                        this.State.MainMods.AddValues(slot.Value);
+                        if (slot.Value == MainMods.Riven) { enableRivens = true; }
+                    }
                 }
+                if (this.chkArcaneMomentum1.Checked) { this.State.MainMods.AddValues(Arcanes.Momentum); }
+                if (this.chkArcaneMomentum2.Checked) { this.State.MainMods.AddValues(Arcanes.Momentum); }
+                this.EnableRivens(enableRivens);
             }
-            if (this.chkArcaneMomentum1.Checked) { this.State.MainMods.AddValues(Arcanes.Momentum); }
-            if (this.chkArcaneMomentum2.Checked) { this.State.MainMods.AddValues(Arcanes.Momentum); }
-            this.doingMassStateChange = false;
-            this.EnableRivens(enableRivens);
-            this.StateChanged();
         }
 
         private void EidolonChoiceChanged()
@@ -375,265 +436,272 @@ namespace WarframeDPSTool
             if (this.outputCaseWorst.Checked) { this.State.DPSCase = DPSCase.Worst; }
         }
 
-        private int StateChangeCount = 0;
-        public void StateChanged()
-        {
-            StateChangeCount++;
-            if(StateChangeCount>1)
-            {
-                if (Debugger.IsAttached)
-                {
-                    //is recursion ok?
-                    Debugger.Break();
-                }
-            }
-
-            if(this.State.Sniper == null)
-            {
-                this.SetDynamicLabels("Choose Weapon");
-                this.btnMainModsOptimize.Enabled = false;
-            }
-            else if(this.doingMassStateChange)
-            {
-                this.SetDynamicLabels("Calculating...");
-                this.btnMainModsOptimize.Enabled = false;
-            }
-            else
-            {
-                this.CheckPrimitivesForChanges();
-                int damageAfterNumberOfShots = 0;
-                int.TryParse(this.damageAfterNumberOfShotsInput.Text, out damageAfterNumberOfShots);
-
-                var dps = DPSCalculation.MainCalculation(this.State.Eidolon, this.State.DPSCase, this.State.Sniper, this.State.Elements.ToArray(), this.State.Health.ToHealth(), damageAfterNumberOfShots, this.State.MainMods.ToMod("MainMods"), this.rivenChoice1.Checked ? this.State.Riven1.ToMod("Riven1") : this.State.Riven2.ToMod("Riven2"));
-
-                this.toLimbBreak_NumReloads.Text = dps.ToLimbBreak_NumReloads.ToString();
-                this.toLimbBreak_NumShots.Text = dps.ToLimbBreak_NumShots.ToString();
-                this.toLimbBreak_Time.Text = String.Format("{0:0.00}", dps.ToLimbBreak_TimeSeconds);
-                this.toLimbBreak_TotalDamage.Text = String.Format("{0:0.00}", dps.ToLimbBreak_TotalDamage);
-                this.toLimbBreak_WastedDamage.Text = String.Format("{0:0.00}", (dps.ToLimbBreak_TotalDamage - dps.EidolonLimbHealth));
-
-                this.damageAfterNumberOfShotsOutput.Text = string.Format("{0:0.00}", dps.DamageAfterVariableNumberOfShots);
-
-                this.reloadTimeValue.Text = String.Format("{0:0.00}", dps.ReloadTime.TotalSeconds);
-                this.wfBuilderSustainedRawValue.Text = String.Format("{0:0.00}", dps.WFBuilderSustainedRaw);
-                this.wfBuilderSustainedDetailsValue.Text = String.Format("{0:0.00}", dps.WFBuilderSustainedDetails);
-
-                this.eidolonLimbHealth.Text = String.Format("{0:0.00}", dps.EidolonLimbHealth);
-                this.btnMainModsOptimize.Enabled = true;
-            }
-
-
-            StateChangeCount--;
-        }
-
         private void sniperSelectionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var name = this.sniperSelectionBox.SelectedItem.ToString();
-            this.State.Sniper = Sniper.AllSnipers.Where((x) => x.Name == name).First();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                var lastClass = this.State.Weapon == null ? WeaponClass.None : this.State.Weapon.WeaponClass;
+
+                this.State.Weapon = (Weapon)this.sniperSelectionBox.SelectedItem;
+
+                if(lastClass!=this.State.Weapon.WeaponClass)
+                {
+                    bool isRifle = this.State.Weapon.WeaponClass.HasFlag(WeaponClass.Rifle);
+                    this.chkOptimizeIncludesHeavyCaliber.Enabled = isRifle;
+                    if (!isRifle)
+                    {
+                        this.chkOptimizeIncludesHeavyCaliber.Checked = false;
+                    }
+
+                    this.ModSlots.ClearSelectedMods();
+                    this.ModSlots.SetModChoices(MainMods.AllMods(this.State.Weapon.WeaponClass, this.chkOptimizeIncludesHeavyCaliber.Checked, this.State.Weapon.AugmentNames));
+                    this.ModSlots.SetToDefaults(this.State.Weapon.WeaponClass, this.chkOptimizeIncludesHeavyCaliber.Checked);
+                }
+            }
         }
 
         private void btnRiven1Clear_Click(object sender, EventArgs e)
         {
-            this.State.Riven1.Clear();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.State.Riven1.Clear();
+            }
         }
 
         private void btnRiven2Clear_Click(object sender, EventArgs e)
         {
-            this.State.Riven2.Clear();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.State.Riven2.Clear();
+            }
         }
 
         private void btnHealthRobotic_Click(object sender, EventArgs e)
         {
-            this.doingMassStateChange = true;
-            this.State.Health.SetToRobotic();
-            this.doingMassStateChange = false;
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.State.Health.SetToRobotic();
+            }
         }
 
         private void btnHealthClear_Click(object sender, EventArgs e)
         {
-            this.doingMassStateChange = true;
-            this.State.Health.Clear();
-            this.doingMassStateChange = false;
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.State.Health.Clear();
+            }
         }
 
         private void rivenChoice1_CheckedChanged(object sender, EventArgs e)
         {
-            this.StateChanged();
+            using (this.MassStateChange) { }
         }
 
         private void elementChoice1_CheckedChanged(object sender, EventArgs e)
         {
-            this.ElementChoiceChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.ElementChoiceChanged();
+            }
         }
 
         private void elementChoice2_CheckedChanged(object sender, EventArgs e)
         {
-            this.ElementChoiceChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.ElementChoiceChanged();
+            }
         }
 
         private void elementChoice3_CheckedChanged(object sender, EventArgs e)
         {
-            this.ElementChoiceChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.ElementChoiceChanged();
+            }
         }
 
         private void damageAfterNumberOfShotsInput_TextChanged(object sender, EventArgs e)
         {
-            int i = 0;
-            int.TryParse(this.damageAfterNumberOfShotsInput.Text, out i);
-            if(i>100)
+            using (this.MassStateChange)
             {
-                this.damageAfterNumberOfShotsInput.Text = "100";
+                int i = 0;
+                int.TryParse(this.damageAfterNumberOfShotsInput.Text, out i);
+                if (i > 100)
+                {
+                    this.damageAfterNumberOfShotsInput.Text = "100";
+                }
             }
-            this.StateChanged();
         }
 
         private void eidoChoiceTerry_CheckedChanged(object sender, EventArgs e)
         {
-            this.EidolonChoiceChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.EidolonChoiceChanged();
+            }
         }
 
         private void eidoChoiceGary_CheckedChanged(object sender, EventArgs e)
         {
-            this.EidolonChoiceChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.EidolonChoiceChanged();
+            }
         }
 
         private void eidoChoiceHarry_CheckedChanged(object sender, EventArgs e)
         {
-            this.EidolonChoiceChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.EidolonChoiceChanged();
+            }
         }
 
         private void outputCaseAverage_CheckedChanged(object sender, EventArgs e)
         {
-            this.DPSCaseChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.DPSCaseChanged();
+            }
         }
 
         private void outputCaseBest_CheckedChanged(object sender, EventArgs e)
         {
-            this.DPSCaseChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.DPSCaseChanged();
+            }
         }
 
         private void outputCaseWorst_CheckedChanged(object sender, EventArgs e)
         {
-            this.DPSCaseChanged();
-            this.StateChanged();
+            using (this.MassStateChange)
+            {
+                this.DPSCaseChanged();
+            }
         }
 
         private void btnMainModsDefault_Click(object sender, EventArgs e)
         {
-            this.State.MainMods.Clear();
-            SetModSlot(this.modSlot1, "Serration");
-            SetModSlot(this.modSlot2, "SplitChamber");
-            SetModSlot(this.modSlot3, "HeavyCaliber");
-            SetModSlot(this.modSlot4, "PointStrike");
-            SetModSlot(this.modSlot5, "VitalSense");
-            SetModSlot(this.modSlot6, "PrimedCryoRounds");
-            SetModSlot(this.modSlot7, "Hellfire");
-            SetModSlot(this.modSlot8, "Stormbringer");
-
-            this.SlottedModsChanged();
+            using (this.MassStateChange)
+            {
+                this.State.MainMods.Clear();
+                this.ModSlots.SetToDefaults(this.State.Weapon.WeaponClass, this.chkOptimizeIncludesHeavyCaliber.Checked);
+                this.SlottedModsChanged();
+            }
         }
 
         private void btnMainModsClear_Click(object sender, EventArgs e)
         {
-            this.State.MainMods.Clear();
-            foreach(var slot in this.ModSlots)
+            using (this.MassStateChange)
             {
-                slot.SelectedItem = null;
+                this.State.MainMods.Clear();
+                this.ModSlots.ClearSelectedMods();
             }
-            this.SlottedModsChanged();
         }
 
         private void btnMainModsOptimize_Click(object sender, EventArgs e)
         {
-            int arcaneReload = 0;
-            if (this.chkArcaneMomentum1.Checked) { arcaneReload += 100; }
-            if (this.chkArcaneMomentum2.Checked) { arcaneReload += 100; }
-            Mod arcanes = new Mod("Arcanes", 0, 0, 0, 0, 0, 0, 0, 0, 0, arcaneReload, 0, 0, 0, 0, 0);
-            var bestMods = DPSCalculation.FindBestMods(
-                this.State.Eidolon, this.State.DPSCase, this.State.Sniper, this.State.Health.ToHealth(),
-                this.State.Riven1.HasValue() ? this.State.Riven1.ToMod("Riven1") : null,
-                this.State.Riven2.HasValue() ? this.State.Riven2.ToMod("Riven2") : null,
-                arcanes, this.chkOptimizeIncludesHeavyCaliber.Checked
-                );
-
-            Mod riven = null;
-            for(int i=bestMods.Mods.Count-1;i>=0;i--)
+            using (this.MassStateChange)
             {
-                if(bestMods.Mods[i].Name.StartsWith("Riven"))
+                int arcaneReload = 0;
+                if (this.chkArcaneMomentum1.Checked) { arcaneReload += 100; }
+                if (this.chkArcaneMomentum2.Checked) { arcaneReload += 100; }
+                Mod arcanes = new Mod("Arcanes", WeaponClass.Sniper, 0, 0, 0, 0, 0, 0, 0, 0, 0, arcaneReload, 0, 0, 0, 0, 0);
+                var bestMods = DPSCalculation.FindBestMods(
+                    this.State.Eidolon, this.State.DPSCase, this.State.Weapon, this.State.Health.ToHealth(),
+                    this.State.Riven1.HasValue() ? this.State.Riven1.ToMod("Riven1") : null,
+                    this.State.Riven2.HasValue() ? this.State.Riven2.ToMod("Riven2") : null,
+                    arcanes, this.chkOptimizeIncludesHeavyCaliber.Checked
+                    );
+
+                Mod riven = null;
+                for (int i = bestMods.Mods.Count - 1; i >= 0; i--)
                 {
-                    riven = bestMods.Mods[i];
-                    bestMods.Mods.RemoveAt(i);
-                    break;
-                }
-            }
-
-
-            this.State.MainMods.Clear();
-            for(int i=0;i<bestMods.Mods.Count;i++)
-            {
-                SetModSlot(this.ModSlots[i], bestMods.Mods[i].Name);
-            }
-
-            if(riven!=null)
-            {
-                SetModSlot(this.modSlot8, MainMods.Riven.Name);
-                if(riven.Name.EndsWith("1"))
-                {
-                    this.rivenChoice1.PerformClick();
-                }
-                else if(riven.Name.EndsWith("2"))
-                {
-                    this.rivenChoice2.PerformClick();
-                }
-                else
-                { throw new NotImplementedException(); }
-            }
-
-            this.SlottedModsChanged();
-
-            this.ElementChoicesChanged();
-
-            for (int i = 0; i < this.State.ElementChoices.Count; i++)
-            {
-                bool match = true;
-                foreach (var elem in bestMods.Elements)
-                {
-                    if (!this.State.ElementChoices[i].Contains(elem))
+                    if (bestMods.Mods[i].Name.StartsWith("Riven"))
                     {
-                        match = false;
+                        riven = bestMods.Mods[i];
+                        bestMods.Mods.RemoveAt(i);
                         break;
                     }
                 }
-                if(match)
+
+                this.State.MainMods.Clear();
+                this.ModSlots.SetSelectedMods(bestMods.Mods);
+
+                if (riven != null)
                 {
-                    switch(i)
+                    this.ModSlots.Last().Text = MainMods.Riven.Name;
+                    if (riven.Name.EndsWith("1"))
                     {
-                        default: throw new NotImplementedException();
-                        case 0:
-                            this.elementChoice1.PerformClick();
-                            break;
-                        case 1:
-                            this.elementChoice2.PerformClick();
-                            break;
-                        case 2:
-                            this.elementChoice3.PerformClick();
-                            break;
+                        this.rivenChoice1.PerformClick();
                     }
-                    break;
+                    else if (riven.Name.EndsWith("2"))
+                    {
+                        this.rivenChoice2.PerformClick();
+                    }
+                    else
+                    { throw new NotImplementedException(); }
                 }
+
+                this.SlottedModsChanged();
+
+                this.ElementChoicesChanged();
+
+                for (int i = 0; i < this.State.ElementChoices.Count; i++)
+                {
+                    bool match = true;
+                    foreach (var elem in bestMods.Elements)
+                    {
+                        if (!this.State.ElementChoices[i].Contains(elem))
+                        {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (match)
+                    {
+                        switch (i)
+                        {
+                            default: throw new NotImplementedException();
+                            case 0:
+                                this.elementChoice1.PerformClick();
+                                break;
+                            case 1:
+                                this.elementChoice2.PerformClick();
+                                break;
+                            case 2:
+                                this.elementChoice3.PerformClick();
+                                break;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void chkOptimizeIncludesHeavyCaliber_CheckedChanged(object sender, EventArgs e)
+        {
+            using (this.MassStateChange)
+            {
+                this.ModSlots.ClearSelectedMods();
+                this.ModSlots.SetModChoices(MainMods.AllMods(this.State.Weapon.WeaponClass, this.chkOptimizeIncludesHeavyCaliber.Checked, this.State.Weapon.AugmentNames));
+                this.ModSlots.SetToDefaults(this.State.Weapon.WeaponClass, this.chkOptimizeIncludesHeavyCaliber.Checked);
+            }
+        }
+
+        private void chkArcaneMomentum1_CheckedChanged(object sender, EventArgs e)
+        {
+            using (this.MassStateChange)
+            {
+            }
+        }
+
+        private void chkArcaneMomentum2_CheckedChanged(object sender, EventArgs e)
+        {
+            using (this.MassStateChange)
+            {
             }
         }
     }

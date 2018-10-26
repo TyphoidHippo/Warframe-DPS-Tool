@@ -23,21 +23,22 @@ namespace WarframeDPSTool
             TextBox pVsGas,
             TextBox pVsMagnetic,
             TextBox pVsCorrosive,
-            TextBox pVsBlast)
+            TextBox pVsBlast,
+                    Action pOnChange)
         {
-            this.VsImpact = new PercentBinding(pVsImpact);
-            this.VsPuncture = new PercentBinding(pVsPuncture);
-            this.VsSlash = new PercentBinding(pVsSlash);
-            this.VsCold = new PercentBinding(pVsCold);
-            this.VsHeat = new PercentBinding(pVsHeat);
-            this.VsElectric = new PercentBinding(pVsElectric);
-            this.VsToxin = new PercentBinding(pVsToxin);
-            this.VsViral = new PercentBinding(pVsViral);
-            this.VsRadiation = new PercentBinding(pVsRadiation);
-            this.VsGas = new PercentBinding(pVsGas);
-            this.VsMagnetic = new PercentBinding(pVsMagnetic);
-            this.VsCorrosive = new PercentBinding(pVsCorrosive);
-            this.VsBlast = new PercentBinding(pVsBlast);
+            this.VsImpact = new PercentBinding(pVsImpact, pOnChange);
+            this.VsPuncture = new PercentBinding(pVsPuncture, pOnChange);
+            this.VsSlash = new PercentBinding(pVsSlash, pOnChange);
+            this.VsCold = new PercentBinding(pVsCold, pOnChange);
+            this.VsHeat = new PercentBinding(pVsHeat, pOnChange);
+            this.VsElectric = new PercentBinding(pVsElectric, pOnChange);
+            this.VsToxin = new PercentBinding(pVsToxin, pOnChange);
+            this.VsViral = new PercentBinding(pVsViral, pOnChange);
+            this.VsRadiation = new PercentBinding(pVsRadiation, pOnChange);
+            this.VsGas = new PercentBinding(pVsGas, pOnChange);
+            this.VsMagnetic = new PercentBinding(pVsMagnetic, pOnChange);
+            this.VsCorrosive = new PercentBinding(pVsCorrosive, pOnChange);
+            this.VsBlast = new PercentBinding(pVsBlast, pOnChange);
         }
         public readonly PercentBinding VsImpact;
         public readonly PercentBinding VsPuncture;

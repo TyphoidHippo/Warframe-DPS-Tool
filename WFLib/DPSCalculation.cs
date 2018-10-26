@@ -50,7 +50,7 @@ namespace WFLib
             public readonly DPSResult DPSResult;
         }
 
-        public static DPSResult MainCalculation(Eidolon pEidolon, DPSCase pCase, Sniper pSniper, Elements[] pElements, Health pHealthType, int pNumberOfUserShotsToCalculateDamageFor, params Mod[] pMods)
+        public static DPSResult MainCalculation(Eidolon pEidolon, DPSCase pCase, Weapon pSniper, Elements[] pElements, Health pHealthType, int pNumberOfUserShotsToCalculateDamageFor, params Mod[] pMods)
         {
             var dps = DPSBreakdown.FromPrimitives(pSniper, pCase, pElements, pHealthType, pMods);
 
@@ -124,7 +124,7 @@ namespace WFLib
         }
 
 
-        private static BestModsResult FindBestMods(Eidolon pEidolon, DPSCase pCase, Sniper pSniper, Health pHealthType, IReadOnlyCollection<Mod> pMods, Mod pArcanes)
+        private static BestModsResult FindBestMods(Eidolon pEidolon, DPSCase pCase, Weapon pSniper, Health pHealthType, IReadOnlyCollection<Mod> pMods, Mod pArcanes)
         {
             var perms = Permutations(pMods.ToList(), 8, 8);
             int permCount = perms.Count;
@@ -148,10 +148,10 @@ namespace WFLib
             bestResult.Mods.Remove(pArcanes);
             return bestResult;
         }
-        public static BestModsResult FindBestMods(Eidolon pEidolon, DPSCase pCase, Sniper pSniper, Health pHealthType, Mod pRiven1, Mod pRiven2, Mod pArcanes, bool pAllowHeavyCaliber)
+        public static BestModsResult FindBestMods(Eidolon pEidolon, DPSCase pCase, Weapon pSniper, Health pHealthType, Mod pRiven1, Mod pRiven2, Mod pArcanes, bool pAllowHeavyCaliber)
         {
             //List<Mod> allMods = new List<Mod>(MainMods.TestMods);
-            List<Mod> allMods = new List<Mod>(MainMods.AllMods(pAllowHeavyCaliber));
+            List<Mod> allMods = new List<Mod>(MainMods.AllMods(pSniper.WeaponClass, pAllowHeavyCaliber, pSniper.AugmentNames));
             allMods.Remove(allMods.Where((x)=>x.Name == "Riven").Single());
 
             for(int i=allMods.Count-1;i>=0;i--)
@@ -229,7 +229,7 @@ namespace WFLib
             public double Corrosive;
             public double Blast;
 
-            public static DPSBreakdown FromPrimitives(Sniper pSniper, DPSCase pCase, Elements[] pElements, Health pHealthType, params Mod[] pMods)
+            public static DPSBreakdown FromPrimitives(Weapon pSniper, DPSCase pCase, Elements[] pElements, Health pHealthType, params Mod[] pMods)
             {
                 //First do base damage mods (Serration, Heavy Caliber)
                 double baseImpact = pSniper.Impact;

@@ -1607,6 +1607,7 @@
             // 
             // btnMainModsDefault
             // 
+            this.btnMainModsDefault.Enabled = false;
             this.btnMainModsDefault.Location = new System.Drawing.Point(12, 269);
             this.btnMainModsDefault.Name = "btnMainModsDefault";
             this.btnMainModsDefault.Size = new System.Drawing.Size(75, 23);
@@ -1639,32 +1640,38 @@
             // chkArcaneMomentum1
             // 
             this.chkArcaneMomentum1.AutoSize = true;
+            this.chkArcaneMomentum1.Enabled = false;
             this.chkArcaneMomentum1.Location = new System.Drawing.Point(17, 365);
             this.chkArcaneMomentum1.Name = "chkArcaneMomentum1";
             this.chkArcaneMomentum1.Size = new System.Drawing.Size(115, 17);
             this.chkArcaneMomentum1.TabIndex = 166;
             this.chkArcaneMomentum1.Text = "Arcane Momentum";
             this.chkArcaneMomentum1.UseVisualStyleBackColor = true;
+            this.chkArcaneMomentum1.CheckedChanged += new System.EventHandler(this.chkArcaneMomentum1_CheckedChanged);
             // 
             // chkArcaneMomentum2
             // 
             this.chkArcaneMomentum2.AutoSize = true;
+            this.chkArcaneMomentum2.Enabled = false;
             this.chkArcaneMomentum2.Location = new System.Drawing.Point(17, 387);
             this.chkArcaneMomentum2.Name = "chkArcaneMomentum2";
             this.chkArcaneMomentum2.Size = new System.Drawing.Size(115, 17);
             this.chkArcaneMomentum2.TabIndex = 167;
             this.chkArcaneMomentum2.Text = "Arcane Momentum";
             this.chkArcaneMomentum2.UseVisualStyleBackColor = true;
+            this.chkArcaneMomentum2.CheckedChanged += new System.EventHandler(this.chkArcaneMomentum2_CheckedChanged);
             // 
             // chkOptimizeIncludesHeavyCaliber
             // 
             this.chkOptimizeIncludesHeavyCaliber.AutoSize = true;
+            this.chkOptimizeIncludesHeavyCaliber.Enabled = false;
             this.chkOptimizeIncludesHeavyCaliber.Location = new System.Drawing.Point(93, 305);
             this.chkOptimizeIncludesHeavyCaliber.Name = "chkOptimizeIncludesHeavyCaliber";
             this.chkOptimizeIncludesHeavyCaliber.Size = new System.Drawing.Size(75, 17);
             this.chkOptimizeIncludesHeavyCaliber.TabIndex = 168;
             this.chkOptimizeIncludesHeavyCaliber.Text = "Heavy Cal";
             this.chkOptimizeIncludesHeavyCaliber.UseVisualStyleBackColor = true;
+            this.chkOptimizeIncludesHeavyCaliber.CheckedChanged += new System.EventHandler(this.chkOptimizeIncludesHeavyCaliber_CheckedChanged);
             // 
             // label71
             // 

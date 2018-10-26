@@ -7,10 +7,39 @@ using System.Threading.Tasks;
 
 namespace WFLib
 {
-    public class Sniper
+    [Flags]
+    public enum WeaponClass
     {
-        public Sniper(
+        None=0,
+        Primary = 1,
+        Rifle = Primary | 2,
+        Sniper = Primary | Rifle | 4,
+        Bow = Primary | Rifle | 8,
+        Shotgun = Primary | 16,
+        Launcher = Primary | Rifle | 32,
+        Melee = 128,
+        Thrown = Melee | 256,
+        Dagger = Melee | 512,
+        Secondary = 1024,
+        SecondaryLauncher = Secondary | 2048,
+        All = 
+            Primary 
+            | Rifle 
+            | Sniper
+            | Bow
+            | Shotgun
+            | Launcher
+            | Melee
+            | Thrown
+            | Dagger
+            | Secondary
+            | SecondaryLauncher
+    }
+    public class Weapon
+    {
+        public Weapon(
             string pName,
+            WeaponClass pWeaponClass,
             double pImpact,
             double pPuncture,
             double pSlash,
@@ -39,6 +68,7 @@ namespace WFLib
             this.Impact = pImpact;
             this.Puncture = pPuncture;
             this.Slash = pSlash;
+            this.WeaponClass = pWeaponClass;
 
             this.Cold = pCold;
             this.Electric = pElectric;
@@ -63,10 +93,11 @@ namespace WFLib
             this.FireRateCappedAt10 = pFireRateCappedAt10;
             this.AugmentNames = new List<string>(pAugmentNames);
 
-            if(this.PelletsTillx15 == 0) { this.PelletsTillx15 = int.MaxValue; }
+            if (this.PelletsTillx15 == 0) { this.PelletsTillx15 = int.MaxValue; }
         }
 
         public readonly string Name;
+        public readonly WeaponClass WeaponClass;
 
         public readonly double Impact;
         public readonly double Puncture;
@@ -115,11 +146,16 @@ namespace WFLib
             }
         }
 
-        public static readonly IReadOnlyCollection<Sniper> AllSnipers = null;
-
-        static Sniper()
+        public override string ToString()
         {
-            var allSnipers = new List<Sniper>();
+            return this.Name;
+        }
+
+        public static readonly IReadOnlyCollection<Weapon> All = null;
+
+        static Weapon()
+        {
+            var allSnipers = new List<Weapon>();
 
             var ass = System.Reflection.Assembly.GetEntryAssembly();
             var path = System.IO.Path.GetDirectoryName(ass.Location);
@@ -127,24 +163,25 @@ namespace WFLib
             foreach (var v in System.IO.File.ReadAllLines(path + "\\Weapons.ini"))
             {
                 string line = v;
-                if(line == null) { continue; }
+                if (line == null) { continue; }
                 line = line.Trim();
                 if (string.IsNullOrWhiteSpace(line)) { continue; }
                 if (line.StartsWith("#")) { continue; }
 
                 var parts = line.Split(',').ToList();
                 string name = parts[0].Trim();
-                if(parts.Count == 23)
+                if (parts.Count == 24)
                 {
                     parts.Add("");
                 }
-                if (parts.Count != 24) { continue; }
+                if (parts.Count != 25) { continue; }
 
                 try
                 {
                     int ii = 0;
-                    allSnipers.Add(new Sniper(
+                    allSnipers.Add(new Weapon(
                         parts[ii++],
+                        (WeaponClass)Enum.Parse(typeof(WeaponClass), parts[ii++]),
                         double.Parse(parts[ii++]),
                         double.Parse(parts[ii++]),
                         double.Parse(parts[ii++]),
@@ -167,17 +204,17 @@ namespace WFLib
                         int.Parse(parts[ii++]),
                         int.Parse(parts[ii++]),
                         bool.Parse(parts[ii++]),
-                        parts[ii++].Split(';').Where((x)=>!string.IsNullOrWhiteSpace(x)).Select((x)=>x.Trim()).ToList()
+                        parts[ii++].Split(';').Where((x) => !string.IsNullOrWhiteSpace(x)).Select((x) => x.Trim()).ToList()
                         ));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     var vv = ex;
                     if (Debugger.IsAttached) { Debugger.Break(); }
                 }
             }
 
-            AllSnipers = allSnipers;
+            All = allSnipers;
         }
     }
 }

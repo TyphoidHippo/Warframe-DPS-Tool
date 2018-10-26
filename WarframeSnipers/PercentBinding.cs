@@ -26,10 +26,11 @@ namespace WarframeDPSTool
             set { this._FormElement.Text = value.AsPercent0to100.ToString(); this._OnChange(); }
         }
 
-        public PercentBinding(TextBox pFormElement)
+        public PercentBinding(TextBox pFormElement, Action pOnChange)
         {
             this._FormElement = pFormElement;
-            this._OnChange = ((Form1)(pFormElement.FindForm())).StateChanged;
+            this._OnChange = pOnChange;
+            //{ ((Form1)(pFormElement.FindForm())).mass; };
             this._FormElement.TextChanged += _FormElement_TextChanged;
         }
 

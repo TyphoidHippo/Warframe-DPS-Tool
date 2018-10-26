@@ -25,25 +25,26 @@ namespace WarframeDPSTool
             TextBox pHeat,
             TextBox pElectric,
             TextBox pToxin,
-            TextBox pAugmentBonusDamage)
+            TextBox pAugmentBonusDamage,
+            Action pOnChange)
         {
-            this.CritChance = new PercentBinding(pCritChance);
-            this.CritDamage = new PercentBinding(pCritDamage);
-            this.Multishot = new PercentBinding(pMultishot);
-            this.Damage = new PercentBinding(pDamage);
-            this.Impact = new PercentBinding(pImpact);
-            this.Puncture = new PercentBinding(pPuncture);
-            this.Slash = new PercentBinding(pSlash);
-            this.FireRate = new PercentBinding(pFireRate);
-            this.Reload = new PercentBinding(pReload);
-            this.MagazineSize = new PercentBinding(pMagazineSize);
-            this.Cold = new PercentBinding(pCold);
-            this.Heat = new PercentBinding(pHeat);
-            this.Electric = new PercentBinding(pElectric);
-            this.Toxin = new PercentBinding(pToxin);
+            this.CritChance = new PercentBinding(pCritChance, pOnChange);
+            this.CritDamage = new PercentBinding(pCritDamage, pOnChange);
+            this.Multishot = new PercentBinding(pMultishot, pOnChange);
+            this.Damage = new PercentBinding(pDamage, pOnChange);
+            this.Impact = new PercentBinding(pImpact, pOnChange);
+            this.Puncture = new PercentBinding(pPuncture, pOnChange);
+            this.Slash = new PercentBinding(pSlash, pOnChange);
+            this.FireRate = new PercentBinding(pFireRate, pOnChange);
+            this.Reload = new PercentBinding(pReload, pOnChange);
+            this.MagazineSize = new PercentBinding(pMagazineSize, pOnChange);
+            this.Cold = new PercentBinding(pCold, pOnChange);
+            this.Heat = new PercentBinding(pHeat, pOnChange);
+            this.Electric = new PercentBinding(pElectric, pOnChange);
+            this.Toxin = new PercentBinding(pToxin, pOnChange);
             if (pAugmentBonusDamage != null)
             {
-                this.AugmentBonusDamage = new PercentBinding(pAugmentBonusDamage);
+                this.AugmentBonusDamage = new PercentBinding(pAugmentBonusDamage, pOnChange);
             }
         }
 
@@ -125,6 +126,7 @@ namespace WarframeDPSTool
         public static Mod ToMod(this ModBinding pThis, string pName)
         {
             return new Mod(pName,
+                WeaponClass.All,
                 pThis.CritChance.Value,
                 pThis.CritDamage.Value,
                 pThis.MagazineSize.Value,

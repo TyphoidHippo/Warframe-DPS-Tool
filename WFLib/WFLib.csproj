@@ -50,7 +50,7 @@
     <Compile Include="Mod.cs" />
     <Compile Include="Percent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sniper.cs" />
+    <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="HealthTypes.ini">
@@ -61,12 +61,24 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mods.ini">
+    <Content Include="Mods_Rifle.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Mods_Melee.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mods_Shotgun.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mods_Sniper.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="Mods_Pistol.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

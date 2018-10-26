@@ -12,6 +12,7 @@ namespace WFLib
     {
         public Mod(
             string pName,
+            WeaponClass pWeaponClass,
             Percent pCritChance,
             Percent pCritDamage,
             Percent pMagazineSize,
@@ -29,6 +30,7 @@ namespace WFLib
             Percent pAugmentBonus)
         {
             this.Name = pName;
+            this.WeaponClass = pWeaponClass;
             this.CritChance = pCritChance;
             this.CritDamage = pCritDamage;
             this.MagazineSize = pMagazineSize;
@@ -46,6 +48,7 @@ namespace WFLib
             this.AugmentBonus = pAugmentBonus;
         }
         public readonly string Name;
+        public readonly WeaponClass WeaponClass;
         public readonly Percent CritChance;
         public readonly Percent CritDamage;
         public readonly Percent MagazineSize;
@@ -63,18 +66,45 @@ namespace WFLib
         public readonly Percent AugmentBonus;
 
         public bool IsAugment { get { return this.AugmentBonus.AsDecimal0to1 != 0; } }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 
     public static class MainMods
     {
-        private static readonly Mod HeavyCaliber = new Mod("HeavyCaliber", 0, 0, 0, 0, 165, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        public static readonly Mod Riven = new Mod("Riven", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        private static readonly Mod HeavyCaliber = new Mod("HeavyCaliber", WeaponClass.Rifle, 0, 0, 0, 0, 165, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        public static readonly Mod Riven = new Mod("Riven", WeaponClass.All, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         private static readonly IReadOnlyCollection<Mod> _AllMods = null;
-        private static readonly IReadOnlyCollection<Mod> _AllModsNoHeavyCaliber = null;
-        public static IReadOnlyCollection<Mod> AllMods(bool pIncludeHeavyCaliber)
+        private static readonly Dictionary<Tuple<WeaponClass, bool, string>, IReadOnlyCollection<Mod>> _FilteredMods = new Dictionary<Tuple<WeaponClass, bool, string>, IReadOnlyCollection<Mod>>();
+
+        public static IReadOnlyCollection<Mod> AllMods(WeaponClass pWeaponClass, bool pIncludeHeavyCaliber, IReadOnlyCollection<string> pAugments)
         {
-            return pIncludeHeavyCaliber ? _AllMods : _AllModsNoHeavyCaliber;
+            var key = new Tuple<WeaponClass, bool, string>(pWeaponClass, pIncludeHeavyCaliber, string.Join("|", pAugments));
+            if (!_FilteredMods.ContainsKey(key))
+            {
+                if (pIncludeHeavyCaliber && !pWeaponClass.HasFlag(WeaponClass.Rifle))
+                {
+                    throw new NotImplementedException("Heavy Caliber on non rifle?");
+                }
+
+                var result = new List<Mod>();
+
+                foreach (var mod in _AllMods)
+                {
+                    if (mod == HeavyCaliber && !pIncludeHeavyCaliber) { continue; }
+
+                    if (mod.WeaponClass == WeaponClass.All || pWeaponClass.HasFlag(mod.WeaponClass) || pAugments.Contains(mod.Name))
+                    {
+                        result.Add(mod);
+                    }
+                }
+                 _FilteredMods.Add(key, result);
+            }
+            return _FilteredMods[key];
         }
 
         static MainMods()
@@ -86,61 +116,65 @@ namespace WFLib
             var ass = System.Reflection.Assembly.GetEntryAssembly();
             var path = System.IO.Path.GetDirectoryName(ass.Location);
 
-            foreach (var v in System.IO.File.ReadAllLines(path + "\\Mods.ini"))
+            var modFiles = System.IO.Directory.GetFiles(path, "Mods_*.ini", System.IO.SearchOption.TopDirectoryOnly);
+            foreach (var modFile in modFiles)
             {
-                string line = v;
-                if (line == null) { continue; }
-                line = line.Trim();
-                if (string.IsNullOrWhiteSpace(line)) { continue; }
-                if (line.StartsWith("#")) { continue; }
-
-                var parts = line.Split(',').ToList();
-                string name = parts[0].Trim();
-
-                if (string.IsNullOrWhiteSpace(name)) { continue; }
-                if (allMods.ContainsKey(name)) { continue; }
-
-                if (parts.Count != 16) { continue; }
-
-                try
+                foreach (var v in System.IO.File.ReadAllLines(modFile))
                 {
-                    int ii = 0;
-                    allMods.Add(name, new Mod(parts[ii++],
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++])),
-                        Percent.FromPercent0to100(double.Parse(parts[ii++]))
-                        ));
-                }
-                catch (Exception ex)
-                {
-                    var vv = ex;
-                    if (Debugger.IsAttached) { Debugger.Break(); }
+                    string line = v;
+                    if (line == null) { continue; }
+                    line = line.Trim();
+                    if (string.IsNullOrWhiteSpace(line)) { continue; }
+                    if (line.StartsWith("#")) { continue; }
+
+                    var parts = line.Split(',').ToList();
+                    string name = parts[0].Trim();
+
+                    if (string.IsNullOrWhiteSpace(name)) { continue; }
+                    if (allMods.ContainsKey(name)) { continue; }
+
+                    if (parts.Count != 17) { continue; }
+
+                    try
+                    {
+                        int ii = 0;
+                        allMods.Add(name, new Mod(parts[ii++],
+                            (WeaponClass)Enum.Parse(typeof(WeaponClass), parts[ii++]),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++])),
+                            Percent.FromPercent0to100(double.Parse(parts[ii++]))
+                            ));
+                    }
+                    catch (Exception ex)
+                    {
+                        var vv = ex;
+                        if (Debugger.IsAttached) { Debugger.Break(); }
+                    }
                 }
             }
 
+            var sorted = allMods.Values.ToList();
+            sorted.Sort((a, b) => a.Name.CompareTo(b.Name));
 
-            _AllMods = allMods.Values;
-            var noHC = new List<Mod>(_AllMods);
-            noHC.Remove(HeavyCaliber);
-            _AllModsNoHeavyCaliber = noHC;
+            _AllMods = sorted;
         }
     }
 
     public static class Arcanes
     {
-        public static readonly Mod Momentum = new Mod("Arcane Momentum", 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0);
+        public static readonly Mod Momentum = new Mod("Arcane Momentum", WeaponClass.Sniper, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0);
     }
 
     public static class ModExtensions
@@ -162,6 +196,7 @@ namespace WFLib
             Percent Electric = Percent.Zero;
             Percent Toxin = Percent.Zero;
             Percent AugmentBonus = Percent.Zero;
+            WeaponClass WeaponClass = 0;
 
             foreach (var mod in p)
             {
@@ -180,10 +215,12 @@ namespace WFLib
                 Electric += mod.Electric;
                 Toxin += mod.Toxin;
                 AugmentBonus += mod.AugmentBonus;
+                WeaponClass |= mod.WeaponClass;
             }
 
             return new Mod(
                 pName,
+                WeaponClass,
                 CritChance,
                 CritDamage,
                 MagazineSize,
