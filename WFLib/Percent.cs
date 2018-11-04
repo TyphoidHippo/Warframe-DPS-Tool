@@ -11,11 +11,10 @@ namespace WFLib
     {
         private Percent(double pDecimal0to1)
         {
-            this._Decimal0to1 = pDecimal0to1;
+            this.AsDecimal0to1 = pDecimal0to1;
         }
-        private readonly double _Decimal0to1;
-        public double AsPercent0to100 { get { return this._Decimal0to1 * 100.0; } }
-        public double AsDecimal0to1 { get { return this._Decimal0to1; } }
+        public double AsPercent0to100 { get { return this.AsDecimal0to1 * 100.0; } }
+        public double AsDecimal0to1;
 
         public static Percent FromPercent0to100(double p) { return new Percent(p / 100.0); }
         public static Percent FromDecimal0to1(double p) { return new Percent(p); }

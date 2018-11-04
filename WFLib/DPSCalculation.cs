@@ -97,9 +97,10 @@ namespace WFLib
 
 
         public static List<List<T>> Permutations<T>(
-            IReadOnlyCollection<T> inputList, int minimumItems = 1, int maximumItems = int.MaxValue)
+            IReadOnlyList<T> inputList, int minimumItems = 1, int maximumItems = int.MaxValue)
         {
-            int comboCount = (int)Math.Pow(2, inputList.Count) - 1;
+            int inputListCount = inputList.Count;
+            int comboCount = (int)Math.Pow(2, inputListCount) - 1;
             List<List<T>> result = new List<List<T>>(comboCount + 1);
 
             if (minimumItems == 0)  // Optimize default case
@@ -107,11 +108,13 @@ namespace WFLib
 
             for (int i = 1; i <= comboCount; i++)
             {
-                List<T> thisCombination = new List<T>(inputList.Count);
-                for (int j = 0; j < inputList.Count; j++)
+                List<T> thisCombination = new List<T>(inputListCount);
+                for (int j = 0; j < inputListCount; j++)
                 {
                     if ((i >> j & 1) == 1)
-                        thisCombination.Add(inputList.ElementAt(j));
+                    {
+                        thisCombination.Add(inputList[j]);
+                    }
                 }
 
                 if (thisCombination.Count >= minimumItems && thisCombination.Count <= maximumItems)
