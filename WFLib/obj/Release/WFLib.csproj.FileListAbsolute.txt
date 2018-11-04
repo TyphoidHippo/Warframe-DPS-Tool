@@ -32,5 +32,6 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WFLib\bin\Release\WFLib.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WFLib\bin\Release\WFLib.pdb
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WFLib\bin\Release\ICSharpCode.SharpZipLib.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WFLib\bin\Release\ICSharpCode.SharpZipLib.xml
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WFLib\obj\Release\WFLib.csprojResolveAssemblyReference.cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WFLib\obj\Release\WFLib.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WFLib\obj\Release\WFLib.pdb

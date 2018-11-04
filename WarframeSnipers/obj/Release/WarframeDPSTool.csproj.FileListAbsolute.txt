@@ -21,7 +21,6 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeDPSTool.csproj.GenerateResource.Cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeDPSTool.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeSnipers\WarframeSnipers\obj\Release\WarframeDPSTool.pdb
-Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\WarframeDPSTool.exe.config
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\HealthTypes.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\Weapons.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\Mods_Rifle.ini
@@ -34,6 +33,7 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\Mods_SecondaryLauncher.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\Mods_Dagger.ini
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\Mods_Secondary.ini
+Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\WarframeDPSTool.exe.config
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\WarframeDPSTool.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\WarframeDPSTool.pdb
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers\bin\Release\WFLib.dll
