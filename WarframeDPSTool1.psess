@@ -97,11 +97,6 @@
       <ProjName>WFLib</ProjName>
     </ProjBinary>
   </Binaries>
-  <Reports>
-    <Report>
-      <Path>WarframeDPSTool181026(1).vsp</Path>
-    </Report>
-  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{6F507416-9825-45F1-B2D2-970806942981}|WarframeSnipers\WarframeDPSTool.csproj</Path>
