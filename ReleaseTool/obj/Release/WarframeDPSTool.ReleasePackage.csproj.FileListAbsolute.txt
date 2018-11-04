@@ -10,6 +10,5 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\bin\Release\Rele
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\bin\Release\ReleaseTool.pdb
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\bin\Release\ICSharpCode.SharpZipLib.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\bin\Release\ICSharpCode.SharpZipLib.xml
-Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\obj\Release\WarframeDPSTool.ReleasePackage.csprojResolveAssemblyReference.cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\obj\Release\ReleaseTool.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\obj\Release\ReleaseTool.pdb
