@@ -40,3 +40,10 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers.Tests\bin\Re
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers.Tests\obj\Release\WarframeDPSTool.Tests.csprojResolveAssemblyReference.cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers.Tests\obj\Release\WarframeDPSTool.Tests.dll
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\WarframeSnipers.Tests\obj\Release\WarframeDPSTool.Tests.pdb
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\WarframeSnipers.Tests\bin\Release\WarframeDPSTool.Tests.dll
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\WarframeSnipers.Tests\bin\Release\WarframeDPSTool.Tests.pdb
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\WarframeSnipers.Tests\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\WarframeSnipers.Tests\obj\Release\WarframeDPSTool.Tests.csproj.CoreCompileInputs.cache
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\WarframeSnipers.Tests\obj\Release\WarframeDPSTool.Tests.csproj.CopyComplete
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\WarframeSnipers.Tests\obj\Release\WarframeDPSTool.Tests.dll
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\WarframeSnipers.Tests\obj\Release\WarframeDPSTool.Tests.pdb

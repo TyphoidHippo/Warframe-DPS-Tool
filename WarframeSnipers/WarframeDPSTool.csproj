@@ -110,9 +110,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WFLib\WFLib.csproj">
+    <ProjectReference Include="..\..\..\Lib\TH2.Warframe\src\TH2.Warframe.csproj">
       <Project>{41ca6c48-63b7-4243-84ce-e3d3b53651e4}</Project>
-      <Name>WFLib</Name>
+      <Name>TH2.Warframe</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

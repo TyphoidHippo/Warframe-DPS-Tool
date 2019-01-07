@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarframeDPSTool", "WarframeSnipers\WarframeDPSTool.csproj", "{6F507416-9825-45F1-B2D2-970806942981}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFLib", "WFLib\WFLib.csproj", "{41CA6C48-63B7-4243-84CE-E3D3B53651E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarframeDPSTool.Tests", "WarframeSnipers.Tests\WarframeDPSTool.Tests.csproj", "{AB65E72C-7FA0-4A0A-9A2C-86610ABE055B}"
 EndProject
@@ -16,10 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarframeDPSTool.ReleasePack
 		{41CA6C48-63B7-4243-84CE-E3D3B53651E4} = {41CA6C48-63B7-4243-84CE-E3D3B53651E4}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TH2.Warframe", "..\..\Lib\TH2.Warframe\src\TH2.Warframe.csproj", "{41CA6C48-63B7-4243-84CE-E3D3B53651E4}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -29,10 +26,6 @@ Global
 		{6F507416-9825-45F1-B2D2-970806942981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F507416-9825-45F1-B2D2-970806942981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F507416-9825-45F1-B2D2-970806942981}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB65E72C-7FA0-4A0A-9A2C-86610ABE055B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB65E72C-7FA0-4A0A-9A2C-86610ABE055B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB65E72C-7FA0-4A0A-9A2C-86610ABE055B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,8 +34,18 @@ Global
 		{1D707BF4-4197-496B-BE6C-008C2132F08C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D707BF4-4197-496B-BE6C-008C2132F08C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D707BF4-4197-496B-BE6C-008C2132F08C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41CA6C48-63B7-4243-84CE-E3D3B53651E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2A33AAB-F1EB-4B9D-A30D-7B7D69F37746}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

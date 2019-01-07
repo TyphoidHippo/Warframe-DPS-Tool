@@ -13,3 +13,12 @@ Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\bin\Release\ICSh
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\obj\Release\WarframeDPSTool.ReleasePackage.csprojResolveAssemblyReference.cache
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\obj\Release\ReleaseTool.exe
 Q:\__WORK - W DRIVE\Projects-Dev\C#\WarframeDPSTool\ReleaseTool\obj\Release\ReleaseTool.pdb
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\bin\Release\ReleaseTool.exe.config
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\bin\Release\ReleaseTool.exe
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\bin\Release\ReleaseTool.pdb
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\bin\Release\ICSharpCode.SharpZipLib.dll
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\bin\Release\ICSharpCode.SharpZipLib.xml
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\obj\Release\WarframeDPSTool.ReleasePackage.csproj.CoreCompileInputs.cache
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\obj\Release\WarframeDPSTool.ReleasePackage.csproj.CopyComplete
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\obj\Release\ReleaseTool.exe
+Q:\__WORK - W DRIVE\_Repo\Code\GUI\Warframe-DPS-Tool\ReleaseTool\obj\Release\ReleaseTool.pdb
