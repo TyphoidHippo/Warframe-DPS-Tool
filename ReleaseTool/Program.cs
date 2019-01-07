@@ -18,7 +18,7 @@ namespace ReleaseTool
         private static readonly IReadOnlyCollection<string> _InputFiles = new string[]
         {
             "WarframeDPSTool.exe",
-            "WFLib.dll",
+            "TH2.Warframe.dll",
             "*.ini"
         };
 
